@@ -9,5 +9,5 @@ def clean():
 	for file in files:
 	    file.remove()
 	    print "Removed {} file".format(file)
-	    time.sleep(5.0 - ((time.time() - starttime) % 5.0))
+	    time.sleep(0.2 - ((time.time() - starttime) % 0.2))
 	return "Done"
