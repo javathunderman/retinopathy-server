@@ -1,1 +1,1 @@
-web: python upload.py
+worker: python upload.py
