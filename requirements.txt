@@ -1,4 +1,3 @@
-os
 posixpath
 BaseHTTPServer
 urllib
