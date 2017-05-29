@@ -1,1 +1,1 @@
-web: python upload.py 8000
+web: sudo python upload.py 80
