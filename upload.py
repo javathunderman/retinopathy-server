@@ -41,19 +41,19 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         print r, info, "by: ", self.client_address
         f = StringIO()
         f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
-        f.write("<html><head><meta charset=\"utf-8\"/>\n<title>Results Page</title></head>\n")
+        f.write("<html><head><meta charset=\"utf-8\"/>\n<title>Results Page</title></head>\n") # Upon successful upload, run analysis and generate results.
         f.write("<body>\n<h2>Results Page</h2>\n")
         f.write("<hr>\n")
         if r:
-	    tfoutput = labelimage.test(fn)
-            f.write("<strong>Successful upload.</strong>")
-            finaloutput = tfoutput + "%"
-	    f.write("<br><p>Algorithms show that the image provided is " + finaloutput +"</p>")
-	    f.write("<br><img height = 400 width = 600 src = \"" + filename + "\"></img><br><br>")
+	    tfoutput = labelimage.test(fn) # Run analysis
+            f.write("<strong>Successful upload.</strong>") # Alert user to successful upload
+            finaloutput = tfoutput + "%" # Reformat output from classification algorithm
+	    f.write("<br><p>Algorithms show that the image provided is " + finaloutput +"</p>") # Give output here
+	    f.write("<br><img height = 400 width = 600 src = \"" + filename + "\"></img><br><br>") # Display image again for user convenience
         else:
-            f.write("<strong>Upload failed. \n</strong>")
-        f.write("<a href=\"%s\">Click to return</a>" % self.headers['referer'])
-        f.write("</a>.</small><a href=\"https://github.com/nomikxyz/retinopathy-server\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67\" alt=\"Fork me on GitHub\" data-canonical-src=\"https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png\"></a></body>\n</html>\n")
+            f.write("<strong>Upload failed. \n</strong>") # Alert user to upload failure
+        f.write("<a href=\"%s\">Click to return</a>" % self.headers['referer']) # Redirect user back to homepage
+        f.write("</a>.</small><a href=\"https://github.com/nomikxyz/retinopathy-server\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67\" alt=\"Fork me on GitHub\" data-canonical-src=\"https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png\"></a></body>\n</html>\n") # Github badge
         length = f.tell()
         f.seek(0)
         self.send_response(200)
