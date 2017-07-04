@@ -1,4 +1,4 @@
-# Import sys and tensorflow as tf
+# See main repository for original algorithm. this is basically a derivative of that code
 import tensorflow as tf, sys
 
 # Test
