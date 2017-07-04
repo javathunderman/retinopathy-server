@@ -1,4 +1,4 @@
-MIT License
+MIT License (modified)
 
 Copyright (c) 2017 Nomik
 
@@ -12,6 +12,8 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
+The original authors of this software shall be credited in all copies or substantial portions of the Software. 
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,4 +22,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Some code from https://gist.github.com/UniIsland/3346170. 
+Software included in this project may be the property of other developers (namely the Tensorflow library) and therefore may be subject to their own licensing terms and conditions. 
+
+Some code sourced from https://gist.github.com/UniIsland/3346170. 
