@@ -1,3 +1,4 @@
+# Small bit of code that cleans up images left by the user after analysis
 import time
 import os
 from path import Path
