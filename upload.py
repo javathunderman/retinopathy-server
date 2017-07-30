@@ -157,6 +157,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         f.write("<form accept-charset=utf-8 ENCTYPE=\"multipart/form-data\" method=\"post\">")
         f.write("<input name=\"file\" type=\"file\"/>")
         f.write("<input type=\"submit\" value=\"upload\"/></form>\n")
+        f.write("<br><p>Ensure all files are in the JPEG format. The server will not accept PNG files or JPG files.</p>")
         f.write("</body></html>")
         length = f.tell()
         f.seek(0)
