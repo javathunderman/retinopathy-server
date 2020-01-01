@@ -29,7 +29,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         f = self.send_head()
         if f:
             self.copyfile(f, self.wfile)
-            f.close()	    
+            f.close()
 
     def do_HEAD(self):
         f = self.send_head()
@@ -38,22 +38,22 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     def do_POST(self):
         r, info, fn, filename = self.deal_post_data()
-        print r, info, "by: ", self.client_address
+        print( r, info, "by: ", self.client_address)
         f = StringIO()
         f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
         f.write("<html><head><meta charset=\"utf-8\"/>\n<title>Results Page</title></head>\n") # Upon successful upload, run analysis and generate results.
         f.write("<body>\n<h2>Results Page</h2>\n")
         f.write("<hr>\n")
         if r:
-	    tfoutput = labelimage.test(fn) # Run analysis
+            tfoutput = labelimage.test(fn) # Run analysis
             f.write("<strong>Successful upload.</strong>") # Alert user to successful upload
             finaloutput = tfoutput + "%" # Reformat output from classification algorithm
-	    f.write("<br><p>Algorithms show that the image provided is " + finaloutput +"</p>") # Give output here
-	    f.write("<br><img height = 400 width = 600 src = \"" + filename + "\"></img><br><br>") # Display image again for user convenience
+            f.write("<br><p>Algorithms show that the image provided is " + finaloutput +"</p>") # Give output here
+            f.write("<br><img height = 400 width = 600 src = \"" + filename + "\"></img><br><br>") # Display image again for user convenience
         else:
             f.write("<strong>Upload failed. \n</strong>") # Alert user to upload failure
-        f.write("<a href=\"%s\">Click to return</a>" % self.headers['referer']) # Redirect user back to homepage
-        f.write("</a>.</small><a href=\"https://github.com/nomikxyz/retinopathy-server\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67\" alt=\"Fork me on GitHub\" data-canonical-src=\"https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png\"></a></body>\n</html>\n") # Github badge
+            f.write("<a href=\"%s\">Click to return</a>" % self.headers['referer']) # Redirect user back to homepage
+            f.write("</a>.</small><a href=\"https://github.com/nomikxyz/retinopathy-server\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67\" alt=\"Fork me on GitHub\" data-canonical-src=\"https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png\"></a></body>\n</html>\n") # Github badge
         length = f.tell()
         f.seek(0)
         self.send_response(200)
@@ -79,8 +79,8 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             return (False, "Can't find out file name...")
         path = self.translate_path(self.path)
         fn = os.path.join(path, fn[0])
-	filename = re.sub(path + '/', '', fn)
-	print "This is another test " + filename
+        filename = re.sub(path + '/', '', fn)
+        print ("This is another test " + filename)
         line = self.rfile.readline()
         remainbytes -= len(line)
         line = self.rfile.readline()
@@ -91,25 +91,25 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             return (False, "Can't create file to write, do you have permission to write?")
         preline = self.rfile.readline()
         remainbytes -= len(preline)
-	if fn.find("jpeg") == -1: # This is a check to make sure that we're not getting executables and other junk. 
-	    print "File type not recognized" # Warning: this is a terrible anti-spam check. if you plan on deploying this, PLEASE substitute your own method
-	    return (False, "Invalid file type", fn, filename) # for anti spam here
-	else:
-	    print "File type recognized"
-        while remainbytes > 0:
-            line = self.rfile.readline()
-            remainbytes -= len(line)
-            if boundary in line:
-                preline = preline[0:-1]
-                if preline.endswith('\r'):
+        if fn.find("jpeg") == -1: # This is a check to make sure that we're not getting executables and other junk.
+            print( "File type not recognized") # Warning: this is a terrible anti-spam check. if you plan on deploying this, PLEASE substitute your own method
+            return (False, "Invalid file type", fn, filename) # for anti spam here
+        else:
+            print ("File type recognized")
+            while remainbytes > 0:
+                line = self.rfile.readline()
+                remainbytes -= len(line)
+                if boundary in line:
                     preline = preline[0:-1]
-                out.write(preline)
-                out.close()
-                return (True, "File '%s' upload success!" % fn, fn, filename)
-            else:
-                out.write(preline)
-                preline = line
-        return (False, "Unexpect Ends of data.", fn, filename)
+                    if preline.endswith('\r'):
+                        preline = preline[0:-1]
+                    out.write(preline)
+                    out.close()
+                    return (True, "File '%s' upload success!" % fn, fn, filename)
+                else:
+                    out.write(preline)
+                    preline = line
+            return (False, "Unexpect Ends of data.", fn, filename)
 
     def send_head(self):
         path = self.translate_path(self.path)
@@ -165,8 +165,8 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/html")
         self.send_header("Content-Length", str(length))
         self.end_headers()
-	cleanup.clean()
-	return f
+        cleanup.clean()
+        return f
 
     def translate_path(self, path):
         path = path.split('?',1)[0]
